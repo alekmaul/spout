@@ -1,5 +1,5 @@
 # Define compilation type
-OSTYPE=msys
+OSTYPE?=msys
 #OSTYPE=oda320
 #OSTYPE=odgcw0
 
@@ -14,10 +14,11 @@ LD          = gcc
 else
 ifeq "$(OSTYPE)" "oda320"	
 TOOLCHAIN = /opt/opendingux-toolchain/usr
+EXESUFFIX = .dge
 else
 TOOLCHAIN = /opt/gcw0-toolchain/usr
 endif
-EXESUFFIX = .dge
+EXESUFFIX ?= .elf
 CC = $(TOOLCHAIN)/bin/mipsel-linux-gcc
 LD = $(TOOLCHAIN)/bin/mipsel-linux-gcc
 endif
