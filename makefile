@@ -54,7 +54,7 @@ $(PRGNAME)$(EXESUFFIX): $(OBJS)
 ifeq "$(OSTYPE)" "msys"	
 	$(LD) $(CFLAGS) -o $(PRGNAME)$(EXESUFFIX) $^ $(LDFLAGS)
 else
-	$(LD) $(LDFLAGS) -o $(PRGNAME)$(EXESUFFIX) $^
+	$(LD) -s $(LDFLAGS) -o $(PRGNAME)$(EXESUFFIX) $^
 endif
 
 .c.o:
@@ -62,6 +62,15 @@ endif
 
 spout.o: piece.h font.h sintable.h
 piece.c: piece.h
+
+opk:
+	rm -rf opk_dir
+	cp -r opk_data opk_dir
+	cp $(PRGNAME)$(EXESUFFIX) opk_dir
+	mksquashfs opk_dir spout.opk -all-root -noappend -no-exports -no-xattrs
+
+opkclean:
+	rm -rf opk_dir spout.opk
 
 clean:
 	rm -f $(PRGNAME)$(EXESUFFIX) *.o
