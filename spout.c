@@ -105,10 +105,14 @@ void pceAppProc(int cnt)
 
 	int pad = pcePadGet();
 
-	if(	(pad & (PAD_C | TRG_D)) == (PAD_C | TRG_D) ||
-		(pad & (TRG_C | PAD_D)) == (TRG_C | PAD_D)) {
+/*	if(	(pad & (PAD_C | TRG_D)) == (PAD_C | TRG_D) ||*/
+/*		(pad & (TRG_C | PAD_D)) == (TRG_C | PAD_D)) {*/
+	if(pad & (TRG_C)) {
 		if(gamePhase >= 2) {
-			gamePhase = 0;
+			if(gamePhase == 4)
+			{
+				gamePhase = 0;
+			}
 		} else {
 			pceAppReqExit(0);
 		}
@@ -116,7 +120,7 @@ void pceAppProc(int cnt)
 	}
 
 	if(gamePhase == 4) {
-		if(pad & (TRG_C)) {
+		if(pad & (TRG_D)) {
 			gamePhase = 3;
 		}
 		return;
@@ -229,10 +233,36 @@ void pceAppProc(int cnt)
 		pceFontSetType(0);
 	}
 
-	if((pad & TRG_C) && gamePhase == 3 && gameover == 0) {
+	if((pad & TRG_D) && gamePhase == 3 && gameover == 0) {
 		pceFontSetType(2 + 128);
-		pceFontSetPos(64 - 7 * 4 / 2, 33);
+		pceFontSetPos(64 - 7 * 4 / 2, 28);
 		pceFontPrintf(" pause ");
+		pceFontSetType(0);
+
+		// fill the empty spaces between the text lines below with white bars for better readability
+		pceFontSetType(2 + 128);
+		pceFontSetPos(64 - 19 * 4 / 2, 36);
+		pceFontPrintf("                   ");
+		pceFontSetType(0);
+
+		pceFontSetType(2 + 128);
+		pceFontSetPos(64 - 19 * 4 / 2, 41);
+		pceFontPrintf("                   ");
+		pceFontSetType(0);
+
+		pceFontSetType(2 + 128);
+		pceFontSetPos(64 - 19 * 4 / 2, 46);
+		pceFontPrintf("                   ");
+		pceFontSetType(0);
+
+		pceFontSetType(2 + 128);
+		pceFontSetPos(64 - 19 * 4 / 2, 38);
+		pceFontPrintf(" START  - continue ");
+		pceFontSetType(0);
+
+		pceFontSetType(2 + 128);
+		pceFontSetPos(64 - 19 * 4 / 2, 45);
+		pceFontPrintf(" SELECT - exit     ");
 		pceFontSetType(0);
 
 		gamePhase = 4;

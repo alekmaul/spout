@@ -105,7 +105,7 @@ int pcePadGet() {
 		SDLK_UP,		SDLK_DOWN,		SDLK_LEFT,		SDLK_RIGHT,
 #ifdef OPENDINGUX
 		SDLK_LCTRL,			SDLK_LALT,			SDLK_LCTRL,			SDLK_LALT,
-		SDLK_SPACE,			SDLK_LSHIFT,			SDLK_LSHIFT
+		SDLK_ESCAPE,			SDLK_RETURN,			SDLK_RETURN
 #else		
 		SDLK_a,			SDLK_b,			SDLK_a,			SDLK_b,
 		SDLK_x,			SDLK_y,			SDLK_y
@@ -300,9 +300,9 @@ int main(int argc, char *argv[])
 		nextTick += interval;
 		cnt ++;
 
-		if((keys[SDLK_ESCAPE] == SDL_PRESSED && (keys[SDLK_RETURN] == SDL_PRESSED )) || event.type == SDL_QUIT) {
-			exec = 0;
-		}
+/*		if((keys[SDLK_ESCAPE] == SDL_PRESSED && (keys[SDLK_RETURN] == SDL_PRESSED )) || event.type == SDL_QUIT) {*/
+/*			exec = 0;*/
+/*		}*/
 	}
 
 	pceAppExit();
